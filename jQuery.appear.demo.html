@@ -25,6 +25,8 @@ div{
 $(document).ready(function(){
 	;(function($){
         var $ele=$(".circle");
+        //初始化circleProgress插件，显示灰色为填充区域
+        //initialize the grey, unfilled circle of circleProgress
         $ele.circleProgress({value:0});
         var bodyHeight=window.innerHeight,
             bodyTop;
