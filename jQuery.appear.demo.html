@@ -40,7 +40,7 @@ $(document).ready(function(){
             var flag;
             return function(index){
             	//单个的元素
-                //inside this function we take one jQuery element based on index and handle it
+                //inside this function we take one jQuery element based on its index and handle it
                 var $thisEle=$ele.eq(index);
                 var thisEleHeight=$thisEle.height();
                 var thisEleTop=$thisEle.offset().top;
@@ -48,20 +48,20 @@ $(document).ready(function(){
                 //(optional)define the circleProgress' value
                 //var val=parseInt($thisEle.find("em").html())/100;
                 //每300ms检测一次元素是否已经出现在视口
-                //detect whether the element had appeared in the view port for every 300ms 
+                //detect whether the element had appeared in the view port every 300ms 
                 var circleDraw=setInterval(function(){
                     bodyTop+bodyHeight>thisEleTop+thisEleHeight?flag=true:flag=false;
                     if(flag){
                         $ele.eq(index).circleProgress({value:1});
                         //停止监听
-                        //clear interval for stop monitoring
+                        //clear interval to stop monitoring
                         clearInterval(circleDraw);
                     }
                 },300);
             }
         })($ele);
         //给$ele集合中的每一个元素注册一个函数
-        //using for loop to register one function for every element in jQuery collection
+        //using for loop to assign one closure to every element in jQuery collection
         for(i=0,l=$ele.length;i<l;i++){
             show(i);
         }
