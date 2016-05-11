@@ -1,0 +1,73 @@
+ <html>
+ <head>
+ <style>
+div{
+
+	width: 100px;
+	height: 100px;
+
+}
+
+ </style>
+
+
+<script src="js/jquery-1.12.2.min.js"></script>
+<script src="js/circle-progress.js"></script>
+ </head>
+ <body>
+ <div style="width:100px;height: 1000px;outline: 1px solid black;"></div>
+<div class="circle">
+</div>
+ <div style="width:100px;height: 500px;outline: 1px solid black;"></div>
+ <div class="circle">
+</div>
+<script>
+$(document).ready(function(){
+	;(function($){
+        var $ele=$(".circle");
+        $ele.circleProgress({value:0});
+        var bodyHeight=window.innerHeight,
+            bodyTop;
+        //每300ms更新一次视口已经滚动的距离
+        //update the document.body.scrollTop(the distance that the scroll bar had scrolled) every 300ms
+        setInterval(function(){
+                bodyTop=document.body.scrollTop;
+            },300);
+
+        var show = (function($ele){
+            var flag;
+            return function(index){
+            	//单个的元素
+                //inside this function we take one jQuery element based on index and handle it
+                var $thisEle=$ele.eq(index);
+                var thisEleHeight=$thisEle.height();
+                var thisEleTop=$thisEle.offset().top;
+                //定义值
+                //(optional)define the circleProgress' value
+                //var val=parseInt($thisEle.find("em").html())/100;
+                //每300ms检测一次元素是否已经出现在视口
+                //detect whether the element had appeared in the view port for every 300ms 
+                var circleDraw=setInterval(function(){
+                    bodyTop+bodyHeight>thisEleTop+thisEleHeight?flag=true:flag=false;
+                    if(flag){
+                        $ele.eq(index).circleProgress({value:1});
+                        //停止监听
+                        //clear interval for stop monitoring
+                        clearInterval(circleDraw);
+                    }
+                },300);
+            }
+        })($ele);
+        //给$ele集合中的每一个元素注册一个函数
+        //using for loop to register one function for every element in jQuery collection
+        for(i=0,l=$ele.length;i<l;i++){
+            show(i);
+        }
+    }(jQuery));
+		
+});
+
+
+</script>
+ </body>
+ </html>
