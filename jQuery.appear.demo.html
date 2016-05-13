@@ -24,10 +24,7 @@ div{
 <script>
 $(document).ready(function(){
 	;(function($){
-        var $ele=$(".circle");
-        //初始化circleProgress插件，显示灰色为填充区域
-        //initialize the grey, unfilled circle of circleProgress
-        $ele.circleProgress({value:0});
+
         var bodyHeight=window.innerHeight,
             bodyTop;
         //每300ms更新一次视口已经滚动的距离
@@ -35,36 +32,49 @@ $(document).ready(function(){
         setInterval(function(){
                 bodyTop=document.body.scrollTop;
             },300);
+        var $ele_jinDu_span = $("li.jinDu span");
+        //初始化circleProgress圆圈
+        //initialize the grey, unfilled circle of circleProgress
+        $ele_jinDu_span.circleProgress({
+            value: 0
+        });
+        //circleProgress的回调函数
+        //callBack for circleProgress
+        var circleProgressFire = function($ele,index){
+            //获得circleProgress需要的值
+            //define the circleProgress' value
+            var val = parseInt($ele.find("em").html()) / 100;
+            $ele.eq(index).circleProgress({
+               value: val
+            });
+        };
 
-        var show = (function($ele){
-            var flag;
-            return function(index){
-            	//单个的元素
-                //inside this function we take one jQuery element based on its index and handle it
-                var $thisEle=$ele.eq(index);
-                var thisEleHeight=$thisEle.height();
-                var thisEleTop=$thisEle.offset().top;
-                //定义值
-                //(optional)define the circleProgress' value
-                //var val=parseInt($thisEle.find("em").html())/100;
-                //每300ms检测一次元素是否已经出现在视口
-                //detect whether the element had appeared in the view port every 300ms 
-                var circleDraw=setInterval(function(){
-                    bodyTop+bodyHeight>thisEleTop+thisEleHeight?flag=true:flag=false;
-                    if(flag){
-                        $ele.eq(index).circleProgress({value:1});
+        //元素显示在视口时候的通用函数
+        //Main function
+        var doOnAppear = (function(){
+            return function($ele,index,callBack){
+                var $thisEle = $ele.eq(index);
+                var thisEleHeight = $thisEle.height();
+                var thisEleTop = $thisEle.offset().top;
+                var callBackInvoke = setInterval(function() {
+                    if(bodyTop + bodyHeight > thisEleTop + thisEleHeight + 50){
+                        //调用回调函数
+                        //invoke callBack by passing arguments
+                        callBack($ele,index);
                         //停止监听
                         //clear interval to stop monitoring
-                        clearInterval(circleDraw);
-                    }
-                },300);
+                        clearInterval(callBackInvoke);
+                    };
+                }, 300);
             }
-        })($ele);
+        })();
         //给$ele集合中的每一个元素注册一个函数
         //using for loop to assign one closure to every element in jQuery collection
-        for(i=0,l=$ele.length;i<l;i++){
-            show(i);
+        for (var i = 0,
+        l = $ele_jinDu_span.length; i < l; i++) {
+            doOnAppear($ele_jinDu_span,i,circleProgressFire);
         }
+
     }(jQuery));
 		
 });
