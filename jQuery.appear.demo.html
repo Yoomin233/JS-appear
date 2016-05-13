@@ -40,11 +40,11 @@ $(document).ready(function(){
         });
         //circleProgress的回调函数
         //callBack for circleProgress
-        var circleProgressFire = function($ele,index){
+        var circleProgressFire = function($ele){
             //获得circleProgress需要的值
             //define the circleProgress' value
             var val = parseInt($ele.find("em").html()) / 100;
-            $ele.eq(index).circleProgress({
+            $ele.circleProgress({
                value: val
             });
         };
@@ -60,7 +60,7 @@ $(document).ready(function(){
                     if(bodyTop + bodyHeight > thisEleTop + thisEleHeight + 50){
                         //调用回调函数
                         //invoke callBack by passing arguments
-                        callBack($ele,index);
+                        callBack($thisEle);
                         //停止监听
                         //clear interval to stop monitoring
                         clearInterval(callBackInvoke);
