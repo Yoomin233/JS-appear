@@ -32,10 +32,12 @@
 				detectVisible.scrollBegin = true;
 				if(Date.now() - detectVisible.scrollStartTime > interval){
 					exec(elems, cb);
+					console.log('invoked by throttle!')
 					detectVisible.scrollBegin = false;
 				}
 				detectVisible.timer = setTimeout(function() {
 					exec(elems, cb);
+					console.log('invoked by debounce!')
 				}, interval)
 			})
 		}
