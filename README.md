@@ -1,25 +1,15 @@
 # jQuery.appear
 some code that do something when some element appeared in your view port!
 
-please refer to the source code - the main function is just 28 lines of code! 
+see demo [here](http://yueminhu.github.io/jQuery.appear/index.html)
 
 ##usage
-###include the jQuery and circleProgress
+just call the `detectVisible` function. it takes three parameters: 
 
-(the circleProgress plug-in is just for demostration, you can fire other plug-ins whatever you want!)
-```html
-<script src="js/jquery-1.12.2.min.js"></script>
-<script src="js/circle-progress.js"></script>
-```
+| parameter | type | example | explanation |
+|-----------|----------|------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| selector | string | 'div.elem' | use `document.querySelectorAll` internally |
+| callback | function | function(){this.classList.add('visible') | callback when the element is appeared in the viewport. 'this' refer to the element.  |
+| interval | number | 500 | detection interval for the elem's position. the bigger the better performance, but comes with notable delay.   |
 
-###select the element
-inside the code
-```javascript
-var $ele=$("selector");
-```
-
-And you are all done! Insert the code just before the closing `</body>` tag.
-
-When you scroll down the page and the element is visible in the view port(`flag` is true, detect every 300ms), the plug-in(or other functions)  will be fired.
-
-knowing issues: the plug-in seems not working under FF. 
+enjoy!
