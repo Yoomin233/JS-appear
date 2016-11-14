@@ -1,7 +1,7 @@
 # jQuery.appear
 some code that do something when some element appeared in your view port!
 
-see demo [here](http://yueminhu.github.io/jQuery.appear/)
+see demo [here](http://yueminhu.github.io/jQuery.appear/index.html)
 
 ##usage
 just call the `detectVisible` function. it takes three parameters: 
