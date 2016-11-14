@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vertical-scroll-demo</title>
+</head>
+<body>
+	<div class="elem elem1" data-myvs='false'></div>
+	<div class="elem elem2" data-myvs='false'></div>
+	<div class="elem elem3" data-myvs='false'></div>
+	<style>
+		div.elem{
+			width:100px;
+			height: 1500px;
+			border:1px solid black;
+			transition: all 3s ease;
+		}
+	</style>
+	<script>
+		function detectVisible(selector, cb, interval){
+			var elems = document.querySelectorAll(selector), innerHeight = window.innerHeight;
+			var exec = function(elems, cb){
+				Array.prototype.forEach.call(elems, function(elem, index){
+					if(elem.getBoundingClientRect().top < innerHeight){
+						cb.call(elem, elem);
+					}
+				})
+			}
+			document.addEventListener('scroll', function(){
+				if(detectVisible.timer)clearTimeout(detectVisible.timer);
+				if(!detectVisible.scrollBegin)detectVisible.scrollStartTime = Date.now();
+				detectVisible.scrollBegin = true;
+				if(Date.now() - detectVisible.scrollStartTime > interval){
+					exec(elems, cb);
+					detectVisible.scrollBegin = false;
+				}
+				detectVisible.timer = setTimeout(function() {
+					exec(elems, cb);
+				}, interval)
+			})
+		}
+		detectVisible('div.elem', function(elem){
+			this.style.backgroundColor = 'yellow';
+		}, 500);
+	</script>
+</body>
+</html>
