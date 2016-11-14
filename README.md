@@ -1,7 +1,9 @@
 # JS-appear
-some code that do something when some element appeared in your view port!
+some code that do something when some element appeared in your view port! Function `throttle` and `debounce` tech were used to to achieve better performance. 
 
 see demo [here](http://yueminhu.github.io/jQuery.appear/index.html)
+
+open the console and see how `callback` were triggered. 
 
 ##usage
 just call the `detectVisible` function. it takes three parameters: 
