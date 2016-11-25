@@ -5,15 +5,65 @@
 	<title>vertical-scroll-demo</title>
 </head>
 <body>
-	<div class="elem elem1" data-myvs='false'></div>
-	<div class="elem elem2" data-myvs='false'></div>
-	<div class="elem elem3" data-myvs='false'></div>
+		<p>item 01</p>
+		<p>item 02</p>
+		<p>item 03</p>
+		<p>item 04</p>
+		<p>item 05</p>
+		<p>item 06</p>
+		<p>item 07</p>
+		<p>item 08</p>
+		<p>item 09</p>
+		<p>item 10</p>
+		<p>item 11</p>
+		<p>item 12</p>
+		<p>item 13</p>
+		<p>item 14</p>
+		<p>item 15</p>
+		<p>item 16</p>
+		<p>item 17</p>
+		<p>item 18</p>
+		<p>item 19</p>
+		<p>item 20</p>
+		<p>item 21</p>
+		<p>item 22</p>
+		<p>item 23</p>
+		<p>item 24</p>
+		<p>item 25</p>
+		<p>item 26</p>
+		<p>item 27</p>
+		<p>item 28</p>
+		<p>item 29</p>
+		<p>item 30</p>
+		<p>item 31</p>
+		<p>item 32</p>
+		<p>item 33</p>
+		<p>item 34</p>
+		<p>item 35</p>
+		<p>item 36</p>
+		<p>item 37</p>
+		<p>item 38</p>
+		<p>item 39</p>
+		<p>item 40</p>
+		<p>item 41</p>
+		<p>item 42</p>
+		<p>item 43</p>
+		<p>item 44</p>
+		<p>item 45</p>
+		<p>item 46</p>
+		<p>item 47</p>
+		<p>item 48</p>
+		<p>item 49</p>
+		<p>item 50</p>
 	<style>
-		div.elem{
-			width:100px;
-			height: 1500px;
-			border:1px solid black;
-			transition: all 3s ease;
+		p{
+			opacity:0;
+			transform:translate3d(30px, 0, 0);
+			transition: all .3s ease;
+		}
+		p.active {
+			opacity:1;
+			transform:translate3d(0, 0, 0);
 		}
 	</style>
 	<script>
@@ -40,9 +90,10 @@
 					console.log('invoked by debounce!')
 				}, interval)
 			})
+			exec(elems, cb);
 		}
-		detectVisible('div.elem', function(elem){
-			this.style.backgroundColor = 'yellow';
+		detectVisible('p', function(elem){
+			this.classList.add('active');
 		}, 500);
 	</script>
 </body>
